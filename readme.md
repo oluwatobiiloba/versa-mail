@@ -1,6 +1,6 @@
 # Versa Mail
 
-This Emailer package is a Node.js library that simplifies sending emails using either Nodemailer or Azure Communication Services. It provides easy-to-use functions to send single or bulk emails with customizable templates and attachments.
+This emailing package is a Node.js library that simplifies sending emails using either Nodemailer or Azure Communication Services. It provides easy-to-use functions to send single or bulk emails with customizable templates and attachments.
 
 ## Installation
 

@@ -9,11 +9,10 @@
   "license": "ISC",
   "keywords": [
     "azure",
-    "queue",
-    "subscriber",
-    "consumer",
-    "listener",
-    "message"
+    "azure communication",
+    "nodemailer",
+    "email",
+    "email template"
   ],
   "author": "oluwatobiloba.f.a@gmail.com",
   "dependencies": {

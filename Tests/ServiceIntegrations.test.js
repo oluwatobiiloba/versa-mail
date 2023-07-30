@@ -138,7 +138,6 @@ describe("NodeMailer", () => {
       subject: "Test email",
       withDefaultTemplate: true,
       templateName: "welcome",
-      subject: "Test email",
       users,
     });
 

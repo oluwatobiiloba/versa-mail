@@ -18,10 +18,10 @@ To use the Emailer package, you need to import the required modules based on you
 
 ```javascript
 // For Nodemailer
-const { NodeMailer } = require("emailer-package");
+const { NodeMailer } = require("versa-mail");
 
 // For Azure Communication Services
-const { AzureMailer } = require("emailer-package");
+const { AzureMailer } = require("versa-mail");
 ```
 
 ### Creating a Mailer Instance
@@ -29,7 +29,7 @@ const { AzureMailer } = require("emailer-package");
 The Emailer package allows you to create a mailer instance based on the mailer type you want to use. The mailer factory class provides a convenient method for this purpose.
 
 ```javascript
-const { MailerFactory } = require("emailer-package");
+const { MailerFactory } = require("versa-mail");
 
 // Configuration for Nodemailer mailer
 const nodemailerConfig = {

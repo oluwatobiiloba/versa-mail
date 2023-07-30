@@ -83,7 +83,6 @@ class NodeMailer {
    * @param {string} options.subject - The subject of the email.
    * @param {string} options.email - The recipient's email address.
    * @param {string} options.replyTo - The reply-to email address (optional).
-   * @param {string} options.message - The plain text version of the email content (optional).
    * @param {string[]} [options.cc] - An array of email addresses for CC recipients (optional).
    * @param {string[]} [options.bcc] - An array of email addresses for BCC recipients (optional).
    * @param {Object[]} [options.attachments] - An array of attachment objects (optional).
@@ -118,7 +117,6 @@ class NodeMailer {
       to: options.email,
       replyTo: options.replyTo,
       subject: options.subject,
-      text: options.message,
       html: content,
       attachments: options.attachments
         ? options.attachments.map((attachment) => ({
@@ -149,7 +147,6 @@ class NodeMailer {
    * @param {Object[]} options.users - An array of user-specific email options.
    * @param {string} options.users[].email - The recipient's email address.
    * @param {string} options.users[].username - The recipient's username.
-   * @param {string} options.users[].message - The user-specific plain text content of the email (optional).
    * @param {string} options.users[].replyTo - The reply-to email address for the user (optional).
    * @param {Object[]} options.users[].attachments - An array of attachment objects for the user (optional).
    * @param {string} options.users[].attachments[].name - The name of the attachment.
@@ -229,7 +226,6 @@ class NodeMailer {
           to: user.email,
           replyTo: user.replyTo,
           subject: options.subject,
-          text: user.message,
           html: userContent,
           attachments: attachments.length > 0 ? attachments : undefined,
         };

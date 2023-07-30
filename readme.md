@@ -12,24 +12,12 @@ npm install versa-mail
 
 ## Usage
 
-### Importing the Required Modules
-
-To use the Emailer package, you need to import the required modules based on your selected mailer type. If you want to use Nodemailer, import the `NodeMailer` class, and if you prefer Azure Communication Services, import the `AzureMailer` class.
-
-```javascript
-// For Nodemailer
-const { NodeMailer } = require("versa-mail");
-
-// For Azure Communication Services
-const { AzureMailer } = require("versa-mail");
-```
-
 ### Creating a Mailer Instance
 
 The Emailer package allows you to create a mailer instance based on the mailer type you want to use. The mailer factory class provides a convenient method for this purpose.
 
 ```javascript
-const { MailerFactory } = require("versa-mail");
+const MailerFactory = require("versa-mail");
 
 // Configuration for Nodemailer mailer
 const nodemailerConfig = {
@@ -46,11 +34,11 @@ const azureConfig = {
 };
 
 // Create the mailer instance based on the selected type
-const mailerType = "nodemailer"; // Use "nodemailer" for Nodemailer or "azure" for Azure
+const mailerType = "nodemailer"; // Use "nodemailer" for Nodemailer or "azure" for Azure Email Service
 const mailerFactory = new MailerFactory();
 const mailer = mailerFactory.createMailer(mailerType, nodemailerConfig);
 // OR
-// const mailer = mailerFactory.createMailer("azure", azureConfig);
+const mailer = mailerFactory.createMailer("azure", azureConfig);
 ```
 
 ### Sending a Single Email
@@ -68,7 +56,6 @@ const emailOptions = {
   subject: "Test Email",
   email: "recipient@example.com",
   replyTo: "reply@example.com", // Optional
-  message: "This is the plain text content of the email.", // Optional
   cc: ["cc_recipient1@example.com", "cc_recipient2@example.com"], // Optional
   bcc: ["bcc_recipient1@example.com", "bcc_recipient2@example.com"], // Optional
   attachments: [
@@ -108,10 +95,9 @@ const bulkEmailOptions = {
   subject: "Test Email",
   users: [
     {
+      //An object of user specific constants to replace placeholders within the html. User specific Attachments can be handled seperately.
       email: "recipient1@example.com",
       username: "Recipient 1",
-      message: "This is the plain text content of the email for Recipient 1.", // Optional
-      replyTo: "reply1@example.com", // Optional
       attachments: [
         {
           name: "attachment1.txt",
@@ -130,7 +116,7 @@ const bulkEmailOptions = {
   attachments: [
     {
       name: "common_attachment.txt",
-      url: "path/to/common_attachment.txt",
+      url: "path/to/common_attachment.txt", //should a valid CDN link
     },
   ], // Optional
 };

@@ -1,3 +1,10 @@
+/* eslint-disable require-jsdoc */
+/* eslint-disable comma-dangle */
+/* eslint-disable valid-jsdoc */
+/* eslint-disable indent */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable max-len */
+/* eslint-disable quotes */
 // Import required modules
 const AzureMailer = require("./Mailers/AzureMailer");
 const NodeMailer = require("./Mailers/NodeMailer");
@@ -34,6 +41,7 @@ class MailerFactory {
         emailUsername,
         emailPassword,
         senderAddress,
+        // eslint-disable-next-line comma-dangle
         transporter
       );
     } else {

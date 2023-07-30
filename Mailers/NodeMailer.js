@@ -1,3 +1,10 @@
+/* eslint-disable object-curly-spacing */
+/* eslint-disable operator-linebreak */
+/* eslint-disable comma-dangle */
+/* eslint-disable require-jsdoc */
+/* eslint-disable indent */
+/* eslint-disable max-len */
+/* eslint-disable quotes */
 const nodemailer = require("nodemailer");
 const defaultTemplate = require("../DefaultTemplates/defaults");
 const defaultCSS = require("../DefaultCSS/default");
@@ -124,6 +131,7 @@ class NodeMailer {
     try {
       const info = await this.transporter.sendMail(mailOptions);
       console.log(`Email sent: ${info.response}`);
+      return { response: "Email sent successfully" };
     } catch (error) {
       console.error("Error sending email:", error);
     }
@@ -151,7 +159,7 @@ class NodeMailer {
    * @param {Object[]} [options.attachments] - An array of general attachment objects to include in all emails (optional).
    * @param {string} options.attachments[].name - The name of the attachment.
    * @param {string} options.attachments[].url - The URL or path to the attachment file.
-   * @returns {Object} An object containing the status and failed email addresses.
+   * @return {Promise<Object|null>}  A promise containing the status and failed email addresses.
    */
 
   async sendBulk(options) {
@@ -236,7 +244,7 @@ class NodeMailer {
       }
 
       if (failedEmails.length > 0) {
-        console.log(
+        console.error(
           "Failed to send emails to the following recipients:",
           failedEmails
         );
@@ -247,8 +255,11 @@ class NodeMailer {
         failedEmails: failedEmails,
       };
     } catch (e) {
-      console.error("Error:", e.message);
-      return null;
+      // console.error("Sending Error:", e.message);
+      return {
+        status: `Sending Error: ${e.message}`,
+      };
+      // throw new Error(`Sending Error: ${e.message}`);
     }
   }
 }

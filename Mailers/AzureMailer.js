@@ -1,10 +1,18 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable operator-linebreak */
+/* eslint-disable require-jsdoc */
+/* eslint-disable indent */
+/* eslint-disable max-len */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable quotes */
 const { EmailClient } = require("@azure/communication-email");
 const defaultTemplate = require("../DefaultTemplates/defaults");
 const defaultCSS = require("../DefaultCSS/default");
 const axios = require("axios");
 
 /**
- * Represents an AzureMailer instance used for sending emails using Azure Communication Services.
+ * Represents an AzureMailer instance used for sending emails
+ * using Azure Communication Services.
  *
  * @class AzureMailer
  * @constructor
@@ -53,7 +61,7 @@ class AzureMailer {
    * @param {string} options.attachments[].contentType - The content type of the attachment.
    * @param {string} options.attachments[].url - The URL or content of the attachment.
    *
-   * @returns {Promise<Object|null>} A promise that resolves to the response object if the email is sent successfully,
+   * @return {Promise<Object|null>} A promise that resolves to the response object if the email is sent successfully,
    *                                or null if there was an error.
    */
 
@@ -123,6 +131,8 @@ class AzureMailer {
         bcc: options.bcc,
         attachments: attachments,
       };
+
+      console.log(mailOptions);
 
       const poller = await this.emailClient.beginSend(mailOptions);
       const response = await poller.pollUntilDone();
@@ -268,7 +278,7 @@ class AzureMailer {
       const resolvedEmails = await Promise.all(emails);
 
       for (const email of resolvedEmails) {
-        const status = await this._sendSingle(email);
+        const status = this._sendSingle(email);
         if (status === null) {
           failedEmails.push(email.email);
         }
@@ -345,7 +355,7 @@ class AzureMailer {
    *
    * @private
    * @param {string} url - The URL of the attachment file to be converted.
-   * @returns {string} The base64 encoded string representation of the attachment content.
+   * @return {string} The base64 encoded string representation of the attachment content.
    * @throws {Error} If there's an error converting the attachment, an error will be thrown.
    */
   async _convertAttachment(url) {

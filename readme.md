@@ -76,6 +76,15 @@ mailer
     // Error sending email
     console.error("Error sending email:", error);
   });
+
+OR;
+
+try {
+  const sendMail = await mailer.sendEmail(emailOptions);
+  console.log("Email sent successfully:", sendMail);
+} catch (err) {
+  console.error("Error sending email:", err);
+}
 ```
 
 ### Sending Bulk Emails

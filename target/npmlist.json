@@ -1,9 +1,1 @@
-{
-  "version": "1.0.0",
-  "name": "versa-mail",
-  "dependencies": {
-    "@azure/communication-email": { "version": "1.0.0" },
-    "axios": { "version": "1.4.0" },
-    "nodemailer": { "version": "6.9.4" }
-  }
-}
+{"version":"1.0.0","name":"versa-mail","dependencies":{"@azure/communication-email":{"version":"1.0.0"},"axios":{"version":"1.4.0"},"nodemailer":{"version":"6.9.4"}}}

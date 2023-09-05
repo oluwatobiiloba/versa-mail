@@ -36,13 +36,15 @@ class MailerFactory {
         senderAddress,
         transporter,
       } = options;
+
       return new NodeMailer(
         emailService,
         emailUsername,
         emailPassword,
         senderAddress,
         // eslint-disable-next-line comma-dangle
-        transporter
+        transporter,
+        cssConfigurations
       );
     } else {
       throw new Error("Invalid mailing type. Use 'azure' or 'nodemailer'.");

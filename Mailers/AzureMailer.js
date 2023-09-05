@@ -38,9 +38,25 @@ class AzureMailer {
       );
     }
 
+    if (
+      typeof cssConfigurations !== "object" ||
+      !Object.keys(cssConfigurations).some((key) =>
+        Object.keys(defaultCSS).includes(key)
+      )
+    ) {
+      throw new Error(
+        "Invalid CSS Configuration format. Please ensure the CSS configurations match the documentation sample"
+      );
+    }
+
     this.emailClient = new EmailClient(connectionString);
     this.senderAddress = senderAddress;
-    this.cssConfigurations = cssConfigurations;
+
+    // Set CSS configurations and sender's email address
+    this.cssConfigurations = Object.keys(cssConfigurations).length
+      ? cssConfigurations
+      : defaultCSS;
+    this.senderAddress = senderAddress;
   }
 
   /**
@@ -131,8 +147,6 @@ class AzureMailer {
         bcc: options.bcc,
         attachments: attachments,
       };
-
-      console.log(mailOptions);
 
       const poller = await this.emailClient.beginSend(mailOptions);
       const response = await poller.pollUntilDone();

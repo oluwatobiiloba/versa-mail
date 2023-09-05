@@ -21,6 +21,9 @@ class NodeMailer {
    * @param {string} senderAddress - The sender's email address.
    * @param {object} transporter - Optional custom Nodemailer transporter.
    * @param {Object} [cssConfigurations={}] - Optional CSS configurations for customizing email templates.
+   * @param {string} cssConfigurations.USER_DEFINED_BODY_CSS - CSS styles for the email body.
+   * @param {string} cssConfigurations.USER_DEFINED_CONTAINER_CSS - CSS styles for the email container.
+   * @param {string} cssConfigurations.USER_DEFINED_H1_CSS - CSS styles for the h1 element.
    */
   constructor(
     emailService,
@@ -42,7 +45,18 @@ class NodeMailer {
     }
     if (!senderAddress || typeof senderAddress !== "string") {
       throw new Error(
-        "Invalid or missing 'senderAddress'. Please provide a valid sender's email address."
+        "Invalid or missing senderAddress. Please provide a valid sender's email address."
+      );
+    }
+
+    if (
+      typeof cssConfigurations !== "object" ||
+      !Object.keys(cssConfigurations).some((key) =>
+        Object.keys(defaultCSS).includes(key)
+      )
+    ) {
+      throw new Error(
+        "Invalid CSS Configuration format. Please ensure the CSS configurations match the documentation sample"
       );
     }
 
@@ -57,7 +71,9 @@ class NodeMailer {
     }
 
     // Set CSS configurations and sender's email address
-    this.cssConfigurations = cssConfigurations;
+    this.cssConfigurations = Object.keys(cssConfigurations).length
+      ? cssConfigurations
+      : defaultCSS;
     this.senderAddress = senderAddress;
 
     // Create the Nodemailer transporter with provided service credentials

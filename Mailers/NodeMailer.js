@@ -50,7 +50,8 @@ class NodeMailer {
     }
 
     if (
-      typeof cssConfigurations !== "object" ||
+      (Object.keys(cssConfigurations).length &&
+        typeof cssConfigurations !== "object") ||
       !Object.keys(cssConfigurations).some((key) =>
         Object.keys(defaultCSS).includes(key)
       )

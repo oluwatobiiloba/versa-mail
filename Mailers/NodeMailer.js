@@ -48,13 +48,12 @@ class NodeMailer {
         "Invalid or missing senderAddress. Please provide a valid sender's email address."
       );
     }
-
     if (
-      (Object.keys(cssConfigurations).length &&
-        typeof cssConfigurations !== "object") ||
-      !Object.keys(cssConfigurations).some((key) =>
-        Object.keys(defaultCSS).includes(key)
-      )
+      Object.keys(cssConfigurations).length &&
+      (typeof cssConfigurations !== "object" ||
+        !Object.keys(cssConfigurations).some((key) =>
+          Object.keys(defaultCSS).includes(key)
+        ))
     ) {
       throw new Error(
         "Invalid CSS Configuration format. Please ensure the CSS configurations match the documentation sample"

@@ -39,10 +39,11 @@ class AzureMailer {
     }
 
     if (
-      typeof cssConfigurations !== "object" ||
-      !Object.keys(cssConfigurations).some((key) =>
-        Object.keys(defaultCSS).includes(key)
-      )
+      Object.keys(cssConfigurations).length &&
+      (typeof cssConfigurations !== "object" ||
+        !Object.keys(cssConfigurations).some((key) =>
+          Object.keys(defaultCSS).includes(key)
+        ))
     ) {
       throw new Error(
         "Invalid CSS Configuration format. Please ensure the CSS configurations match the documentation sample"

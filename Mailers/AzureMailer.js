@@ -84,6 +84,25 @@ class AzureMailer {
 
   async sendEmail(options) {
     try {
+      if (!options) {
+        throw new Error("mail Options required");
+      }
+
+      if (!options.withDefaultTemplate) {
+        options.withDefaultTemplate === false;
+      }
+      if (!options.withDefaultTemplate && !options.template) {
+        throw new Error("Please provide an html template");
+      }
+      if (!options.email) {
+        throw new Error("Please provide a recipients email");
+      }
+      if (!options.subject) {
+        throw new Error("Please provide a subject");
+      }
+      if (!options.constants) {
+        console.info("There are no constants provided for this email");
+      }
       const template = options.withDefaultTemplate
         ? defaultTemplate[options.templateName]
         : options.template;
@@ -160,8 +179,10 @@ class AzureMailer {
       if (e.name === "RestError") {
         console.error("Azure Communication Services Error:", e.message);
       }
+      return {
+        status: `Sending Error: ${e.message}`,
+      };
     }
-    return null;
   }
 
   /**
@@ -191,6 +212,17 @@ class AzureMailer {
 
   async sendBulk(options) {
     try {
+      if (!options) {
+        throw new Error("mail Options required");
+      }
+
+      if (!options.withDefaultTemplate) {
+        options.withDefaultTemplate === false;
+      }
+      if (!options.withDefaultTemplate && !options.template) {
+        throw new Error("Please provide an html template");
+      }
+
       if (!options.subject || typeof options.subject !== "string") {
         throw new Error(
           "Invalid or missing 'subject'. Please provide a valid subject."
@@ -315,7 +347,9 @@ class AzureMailer {
       if (e.name === "RestError") {
         console.error("Azure Communication Services Error:", e.message);
       }
-      return null;
+      return {
+        status: `Sending Error: ${e.message}`,
+      };
     }
   }
 

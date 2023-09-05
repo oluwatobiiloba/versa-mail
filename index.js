@@ -21,33 +21,37 @@ class MailerFactory {
    * @throws {Error} If an invalid mailing type is provided.
    */
   createMailer(type, options, cssConfigurations) {
-    if (type === "azure") {
-      const { connectionString, senderAddress } = options;
-      return new AzureMailer(
-        connectionString,
-        senderAddress,
-        cssConfigurations
-      );
-    } else if (type === "nodemailer") {
-      const {
-        emailService,
-        emailUsername,
-        emailPassword,
-        senderAddress,
-        transporter,
-      } = options;
+    try {
+      if (type === "azure") {
+        const { connectionString, senderAddress } = options;
+        return new AzureMailer(
+          connectionString,
+          senderAddress,
+          cssConfigurations
+        );
+      } else if (type === "nodemailer") {
+        const {
+          emailService,
+          emailUsername,
+          emailPassword,
+          senderAddress,
+          transporter,
+        } = options;
 
-      return new NodeMailer(
-        emailService,
-        emailUsername,
-        emailPassword,
-        senderAddress,
-        // eslint-disable-next-line comma-dangle
-        transporter,
-        cssConfigurations
-      );
-    } else {
-      throw new Error("Invalid mailing type. Use 'azure' or 'nodemailer'.");
+        return new NodeMailer(
+          emailService,
+          emailUsername,
+          emailPassword,
+          senderAddress,
+          // eslint-disable-next-line comma-dangle
+          transporter,
+          cssConfigurations
+        );
+      } else {
+        throw new Error("Invalid mailing type. Use 'azure' or 'nodemailer'.");
+      }
+    } catch (error) {
+      throw error;
     }
   }
 }

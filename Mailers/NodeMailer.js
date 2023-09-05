@@ -106,6 +106,25 @@ class NodeMailer {
    * @param {string} options.attachments[].url - The URL or path to the attachment file.
    */
   async sendEmail(options) {
+    if (!options) {
+      throw new Error("mail Options required");
+    }
+    if (!options.withDefaultTemplate) {
+      options.withDefaultTemplate === false;
+    }
+    if (!options.withDefaultTemplate && !options.template) {
+      throw new Error("Please provide an html template");
+    }
+    if (!options.email) {
+      throw new Error("Please provide a recipients email");
+    }
+    if (!options.subject) {
+      throw new Error("Please provide a subject");
+    }
+    if (!options.constants) {
+      console.info("There are no constants provided for this email");
+    }
+
     const template = options.withDefaultTemplate
       ? defaultTemplate[options.templateName]
       : options.template;
@@ -146,8 +165,11 @@ class NodeMailer {
       const info = await this.transporter.sendMail(mailOptions);
       console.log(`Email sent: ${info.response}`);
       return { response: "Email sent successfully" };
-    } catch (error) {
-      console.error("Error sending email:", error);
+    } catch (e) {
+      console.error("Error sending email:", e);
+      return {
+        status: `Sending Error: ${e.message}`,
+      };
     }
   }
 
@@ -177,6 +199,16 @@ class NodeMailer {
 
   async sendBulk(options) {
     try {
+      if (!options) {
+        throw new Error("mail Options required");
+      }
+      if (!options.withDefaultTemplate) {
+        options.withDefaultTemplate === false;
+      }
+      if (!options.withDefaultTemplate && !options.template) {
+        throw new Error("Please provide an html template");
+      }
+
       if (!options.subject || typeof options.subject !== "string") {
         throw new Error(
           "Invalid or missing 'subject'. Please provide a valid subject."
@@ -267,7 +299,7 @@ class NodeMailer {
         failedEmails: failedEmails,
       };
     } catch (e) {
-      // console.error("Sending Error:", e.message);
+      console.error("Sending Error:", e.message);
       return {
         status: `Sending Error: ${e.message}`,
       };

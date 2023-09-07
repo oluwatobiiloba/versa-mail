@@ -140,7 +140,7 @@ class AzureMailer {
                 );
               }
               return {
-                name: attachment.name || "attachment",
+                name: attachment.name.split("/").at(-1) || "attachment",
                 contentType:
                   attachment.contentType || "application/octet-stream",
                 contentInBase64: await this._convertAttachment(attachment.url),
@@ -271,7 +271,7 @@ class AzureMailer {
                 );
               }
               return {
-                name: attachment.name || "attachment",
+                name: attachment.name.split("/").at(-1) || "attachment",
                 contentType:
                   attachment.contentType || "application/octet-stream",
                 contentInBase64: await this._convertAttachment(attachment.url),

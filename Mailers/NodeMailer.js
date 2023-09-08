@@ -269,7 +269,10 @@ class NodeMailer {
 
         const userAttachments = user.attachments
           ? user.attachments.map((attachment) => ({
-              filename: attachment.name || "attachment",
+              filename:
+                attachment.url.split("/").at(-1) ||
+                attachment.name ||
+                "attachment",
               path: attachment.url,
             }))
           : [];

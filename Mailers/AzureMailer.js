@@ -140,7 +140,10 @@ class AzureMailer {
                 );
               }
               return {
-                name: attachment.name.split("/").at(-1) || "attachment",
+                name:
+                  attachment.url.split("/").at(-1) ||
+                  attachment.name ||
+                  "attachment",
                 contentType:
                   attachment.contentType || "application/octet-stream",
                 contentInBase64: await this._convertAttachment(attachment.url),
@@ -271,7 +274,10 @@ class AzureMailer {
                 );
               }
               return {
-                name: attachment.name.split("/").at(-1) || "attachment",
+                name:
+                  attachment.url.split("/").at(-1) ||
+                  attachment.name ||
+                  "attachment",
                 contentType:
                   attachment.contentType || "application/octet-stream",
                 contentInBase64: await this._convertAttachment(attachment.url),
@@ -298,7 +304,10 @@ class AzureMailer {
                   );
                 }
                 return {
-                  name: attachment.name || "attachment",
+                  name:
+                    attachment.url.split("/").at(-1) ||
+                    attachment.name ||
+                    "attachment",
                   contentType:
                     attachment.contentType || "application/octet-stream",
                   contentInBase64: await this._convertAttachment(

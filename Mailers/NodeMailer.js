@@ -155,7 +155,10 @@ class NodeMailer {
       html: content,
       attachments: options.attachments
         ? options.attachments.map((attachment) => ({
-            filename: attachment.name.split("/").at(-1) || "attachment",
+            filename:
+              attachment.url.split("/").at(-1) ||
+              attachment.name ||
+              "attachment",
             path: attachment.url,
           }))
         : undefined,
@@ -246,7 +249,10 @@ class NodeMailer {
 
       const allAttachments = options.attachments
         ? options.attachments.map((attachment) => ({
-            filename: attachment.name.split("/").at(-1) || "attachment",
+            filename:
+              attachment.url.split("/").at(-1) ||
+              attachment.name ||
+              "attachment",
             path: attachment.url,
           }))
         : [];

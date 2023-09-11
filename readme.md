@@ -142,7 +142,7 @@ mailer
   });
 ```
 
-## CSS Configurations (Applicable for AzureMailer Only)
+## CSS Configurations 
 
 If you are using the `AzureMailer`, you have the option to customize email templates with CSS configurations. The following CSS configurations are available:
 
